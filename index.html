@@ -1,252 +1,672 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="UMAX MEDIA — Premium Home Theatre Manufacturing in Calicut, Kerala.">
-  <meta name="theme-color" content="#0b0d0f">
-  <title>UMAX MEDIA | Home Theatre Manufacturing</title>
-  <style>
-    :root{
-      --bg:#080a0c; --panel:#101317; --panel2:#15191d; --text:#f5f7f8;
-      --muted:#9da6ad; --accent:#08a7e8; --accent2:#006fa3; --line:rgba(255,255,255,.09);
-      --max:1180px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-    a{color:inherit;text-decoration:none}
-    .noise{position:fixed;inset:0;pointer-events:none;opacity:.035;z-index:100;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
-    .container{width:min(var(--max),92%);margin:auto}
-    header{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 0;transition:.35s}
-    header.scrolled{background:rgba(8,10,12,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-    nav{display:flex;align-items:center;justify-content:space-between}
-    .brand img{width:132px;height:auto;display:block}
-    .navlinks{display:flex;gap:30px;align-items:center}
-    .navlinks a{font-size:13px;color:#cbd1d5;letter-spacing:.08em;text-transform:uppercase;transition:.25s}
-    .navlinks a:hover{color:var(--accent)}
-    .nav-cta{padding:10px 17px;border:1px solid rgba(8,167,232,.55);border-radius:30px;color:#fff!important}
-    .menu{display:none;background:none;border:0;color:#fff;font-size:25px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMAX MEDIA | Premium Home Theatre Manufacturing</title>
+    <meta name="description" content="UMAX MEDIA is a professional home theatre manufacturing company in Calicut, Kerala, specializing in custom home cinemas, acoustic treatment, Dolby Atmos, projection systems and premium theatre interiors.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#e6c762',
+                            500: '#d4af37',
+                            600: '#b5952f',
+                        },
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#171717',
+                            700: '#262626',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Cinzel', 'serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
-    .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
-    .hero:before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;background:rgba(0,145,210,.13);filter:blur(100px);right:-180px;top:-100px}
-    .hero:after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:rgba(0,80,140,.10);filter:blur(100px);left:-180px;bottom:-120px}
-    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center;position:relative;z-index:2}
-    .eyebrow{color:var(--accent);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px}
-    h1{font-size:clamp(48px,7vw,92px);line-height:.95;letter-spacing:-.055em;margin-bottom:24px}
-    h1 span{display:block;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.65)}
-    .hero p{max-width:610px;color:var(--muted);font-size:18px}
-    .actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border-radius:4px;font-weight:700;font-size:14px;letter-spacing:.05em;transition:.3s}
-    .btn-primary{background:var(--accent);color:#041016}
-    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(8,167,232,.25)}
-    .btn-ghost{border:1px solid var(--line);color:#fff}
-    .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-    .hero-logo{display:flex;justify-content:center;align-items:center;animation:float 5s ease-in-out infinite}
-    .hero-logo img{width:min(510px,100%);filter:drop-shadow(0 25px 60px rgba(0,0,0,.55))}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
 
-    section{padding:110px 0;position:relative}
-    .section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:50px}
-    .kicker{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
-    h2{font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.045em}
-    .section-head p{max-width:460px;color:var(--muted)}
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #b5952f; }
 
-    .about{border-top:1px solid var(--line)}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
-    .about-copy{font-size:20px;color:#dce1e4;max-width:600px}
-    .about-copy strong{color:#fff}
-    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-    .stat{padding:30px;background:var(--panel)}
-    .stat b{display:block;font-size:38px;color:var(--accent);line-height:1;margin-bottom:8px}
-    .stat span{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.1em}
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
-    .services{background:#0b0e11}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:linear-gradient(145deg,#14181c,#0e1114);border:1px solid var(--line);padding:34px;min-height:250px;position:relative;overflow:hidden;transition:.35s}
-    .card:before{content:"";position:absolute;inset:auto -50px -90px auto;width:170px;height:170px;border-radius:50%;background:rgba(8,167,232,.08);filter:blur(20px)}
-    .card:hover{transform:translateY(-7px);border-color:rgba(8,167,232,.5)}
-    .icon{font-size:30px;color:var(--accent);margin-bottom:30px}
-    .card h3{font-size:23px;margin-bottom:12px}
-    .card p{color:var(--muted);font-size:15px}
+        .img-hover-zoom { overflow: hidden; }
+        .img-hover-zoom img { transition: transform 0.7s ease; }
+        .img-hover-zoom:hover img { transform: scale(1.05); }
 
-    .experience{overflow:hidden}
-    .experience:before{content:"CINEMA";position:absolute;font-size:19vw;font-weight:900;color:rgba(255,255,255,.018);letter-spacing:-.08em;left:-2vw;top:20px;white-space:nowrap}
-    .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative;z-index:1}
-    .feature{min-height:190px;border:1px solid var(--line);padding:25px;background:rgba(255,255,255,.018)}
-    .feature span{font-size:12px;color:var(--accent);font-weight:800}
-    .feature h3{margin:24px 0 8px;font-size:19px}
-    .feature p{font-size:14px;color:var(--muted)}
+        .glass {
+            background: rgba(23, 23, 23, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-    .cta{padding:80px 0}
-    .cta-box{border:1px solid rgba(8,167,232,.3);background:radial-gradient(circle at 90% 10%,rgba(8,167,232,.14),transparent 35%),#0d1115;padding:60px;display:flex;align-items:center;justify-content:space-between;gap:30px}
-    .cta-box p{color:var(--muted);margin-top:12px;max-width:650px}
-
-    footer{border-top:1px solid var(--line);padding:35px 0;color:#7f898f;font-size:13px}
-    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
-    .footer-brand{color:#fff;font-weight:800;letter-spacing:.08em}
-    .contactline{display:flex;gap:18px;flex-wrap:wrap}
-    .contactline a:hover{color:var(--accent)}
-
-    .reveal{opacity:0;transform:translateY(35px);transition:opacity .8s ease,transform .8s ease}
-    .reveal.visible{opacity:1;transform:none}
-    .delay1{transition-delay:.1s}.delay2{transition-delay:.2s}.delay3{transition-delay:.3s}
-
-    @media(max-width:900px){
-      .hero-grid,.about-grid{grid-template-columns:1fr}
-      .hero{padding-top:130px}
-      .hero-logo{order:-1}
-      .cards{grid-template-columns:1fr 1fr}
-      .feature-grid{grid-template-columns:1fr 1fr}
-      .section-head{display:block}
-      .section-head p{margin-top:20px}
-      .cta-box{display:block;padding:40px}
-      .cta-box .btn{margin-top:25px}
-    }
-    @media(max-width:650px){
-      .navlinks{display:none}
-      .menu{display:block}
-      header.open .navlinks{display:flex;position:absolute;top:70px;left:4%;right:4%;padding:20px;background:#0d1013;border:1px solid var(--line);flex-direction:column;align-items:flex-start}
-      .hero-logo img{width:100%}
-      .cards,.feature-grid{grid-template-columns:1fr}
-      section{padding:80px 0}
-      .hero p{font-size:16px}
-      .footer-inner{display:block}.contactline{margin-top:15px}
-    }
-  </style>
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #lightbox.show { display: flex; opacity: 1; }
+        
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease;
+        }
+        
+        .hero-bg {
+            background-image: url('Eyvox_HT_LH (1).png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .cta-bg {
+            background-image: url('Eyvox_HT_PH (1).jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
-<body>
-<div class="noise"></div>
+<body class="font-body antialiased selection:bg-gold-500 selection:text-black">
 
-<header id="header">
-  <div class="container">
-    <nav>
-      <a class="brand" href="#home" aria-label="UMAX MEDIA home">
-        <img src="assets/umax-media-logo.png" alt="UMAX MEDIA Home Theatre">
-      </a>
-      <div class="navlinks">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#experience">Why UMAX</a>
-        <a href="#contact" class="nav-cta">Contact</a>
-      </div>
-      <button class="menu" id="menu" aria-label="Open menu">☰</button>
+    <div id="preloader">
+        <div class="flex flex-col items-center">
+            <div class="w-16 h-16 border-4 border-dark-800 border-t-gold-500 rounded-full animate-spin"></div>
+            <h2 class="mt-6 font-heading text-xl text-gold-500 tracking-widest uppercase">UMAX Media</h2>
+        </div>
+    </div>
+
+    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-300 py-6 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="block z-50 relative">
+                <img src="Logo.png" alt="UMAX MEDIA" class="h-10 md:h-12 object-contain">
+            </a>
+
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-sm font-medium tracking-wider text-gray-300 hover:text-gold-500 transition-colors uppercase">Home</a>
+                <a href="#about" class="text-sm font-medium tracking-wider text-gray-300 hover:text-gold-500 transition-colors uppercase">About</a>
+                <a href="#expertise" class="text-sm font-medium tracking-wider text-gray-300 hover:text-gold-500 transition-colors uppercase">Expertise</a>
+                <a href="#projects" class="text-sm font-medium tracking-wider text-gray-300 hover:text-gold-500 transition-colors uppercase">Projects</a>
+                <a href="#gallery" class="text-sm font-medium tracking-wider text-gray-300 hover:text-gold-500 transition-colors uppercase">Gallery</a>
+                <a href="#contact" class="px-6 py-2 border border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-black transition-all duration-300 rounded-full text-sm font-medium tracking-wider uppercase">Contact</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 focus:outline-none z-50 relative">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="fixed inset-0 bg-dark-900/95 backdrop-blur-md flex-col justify-center items-center space-y-8 hidden opacity-0 transition-opacity duration-300 h-screen w-full">
+            <a href="#home" class="mobile-link text-2xl font-heading tracking-widest text-white hover:text-gold-500 transition-colors uppercase">Home</a>
+            <a href="#about" class="mobile-link text-2xl font-heading tracking-widest text-white hover:text-gold-500 transition-colors uppercase">About</a>
+            <a href="#expertise" class="mobile-link text-2xl font-heading tracking-widest text-white hover:text-gold-500 transition-colors uppercase">Expertise</a>
+            <a href="#projects" class="mobile-link text-2xl font-heading tracking-widest text-white hover:text-gold-500 transition-colors uppercase">Projects</a>
+            <a href="#gallery" class="mobile-link text-2xl font-heading tracking-widest text-white hover:text-gold-500 transition-colors uppercase">Gallery</a>
+            <a href="#contact" class="mobile-link text-2xl font-heading tracking-widest text-gold-500 uppercase">Contact</a>
+        </div>
     </nav>
-  </div>
-</header>
 
-<main>
-  <section class="hero" id="home">
-    <div class="container hero-grid">
-      <div class="reveal">
-        <div class="eyebrow">Calicut · Kerala · India</div>
-        <h1>WE BUILD<br><span>YOUR CINEMA.</span></h1>
-        <p>UMAX MEDIA creates premium, purpose-built home theatres with immersive sound, cinematic visuals and refined interiors — engineered as one complete experience.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="tel:+9188855199">CALL 91 8885 5199</a>
-          <a class="btn btn-ghost" href="#services">EXPLORE</a>
+    <section id="home" class="relative h-screen flex items-center justify-center hero-bg">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-dark-900"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-20">
+            <h2 class="text-gold-500 tracking-[0.3em] uppercase text-sm md:text-base font-semibold mb-4 reveal">UMAX Media</h2>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 leading-tight reveal" style="transition-delay: 200ms;">
+                HOME THEATRE<br>MANUFACTURING
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto mb-10 reveal" style="transition-delay: 400ms;">
+                "Creating immersive home cinema experiences with precision, technology and premium craftsmanship."
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 reveal" style="transition-delay: 600ms;">
+                <a href="#projects" class="px-8 py-4 bg-gold-500 text-black hover:bg-gold-400 transition-colors duration-300 rounded-full font-medium tracking-wide">EXPLORE OUR PROJECTS</a>
+                <a href="#contact" class="px-8 py-4 border border-white text-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full font-medium tracking-wide">CONTACT US</a>
+            </div>
         </div>
-      </div>
-      <div class="hero-logo reveal delay2">
-        <img src="assets/umax-media-logo.png" alt="UMAX MEDIA">
-      </div>
-    </div>
-  </section>
 
-  <section class="about" id="about">
-    <div class="container">
-      <div class="section-head reveal">
-        <div><div class="kicker">01 / About UMAX</div><h2>More than a room.<br>A cinema experience.</h2></div>
-        <p>From concept to completion, we bring together acoustics, AV technology, lighting and interior detailing to create a theatre that feels made for you.</p>
-      </div>
-      <div class="about-grid">
-        <div class="about-copy reveal">
-          <strong>UMAX MEDIA is a home theatre manufacturing company based in Calicut, Kerala.</strong><br><br>
-          We design and build dedicated entertainment spaces for homes, villas and premium properties — balancing performance, comfort and visual character in every project.
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+            <span class="text-xs tracking-widest text-gray-400 mb-2 uppercase">Scroll</span>
+            <i class="fas fa-chevron-down text-gold-500"></i>
         </div>
-        <div class="stats reveal delay2">
-          <div class="stat"><b>01</b><span>Complete Theatre Solution</span></div>
-          <div class="stat"><b>4K+</b><span>Cinematic Visuals</span></div>
-          <div class="stat"><b>ATMOS</b><span>Immersive Audio Ready</span></div>
-          <div class="stat"><b>360°</b><span>Design Approach</span></div>
+    </section>
+
+    <section id="about" class="py-24 bg-dark-900 relative">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-left">
+                    <h4 class="text-gold-500 tracking-widest uppercase text-sm mb-2 font-semibold">About Us</h4>
+                    <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight">CRAFTING YOUR<br>PRIVATE CINEMA</h2>
+                    <div class="w-20 h-1 bg-gold-500 mb-8"></div>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed font-light">
+                        UMAX MEDIA designs and manufactures customized home theatre spaces, elevating your entertainment through a flawless synthesis of cinema technology, professional acoustic treatment, interior design, and master installation.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-200"><i class="fas fa-check text-gold-500 mr-4"></i> Custom-built theatres</li>
+                        <li class="flex items-center text-gray-200"><i class="fas fa-check text-gold-500 mr-4"></i> Premium materials & Acoustics</li>
+                        <li class="flex items-center text-gray-200"><i class="fas fa-check text-gold-500 mr-4"></i> Flawless AV integration</li>
+                        <li class="flex items-center text-gray-200"><i class="fas fa-check text-gold-500 mr-4"></i> Luxury Cinema interiors</li>
+                    </ul>
+                </div>
+                <div class="reveal img-hover-zoom rounded-2xl shadow-2xl shadow-black/50 overflow-hidden relative">
+                    <img src="Eyvox_HT_LH (2).jpg" alt="Premium Home Theatre" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 border border-white/10 rounded-2xl pointer-events-none"></div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-head reveal">
-        <div><div class="kicker">02 / What We Do</div><h2>Built around<br>your experience.</h2></div>
-        <p>Every element is selected and integrated to work together — from the first sketch to the first movie.</p>
-      </div>
-      <div class="cards">
-        <article class="card reveal"><div class="icon">◈</div><h3>Home Theatre Design</h3><p>Room planning, seating layouts, screen positioning and premium interior concepts tailored to your space.</p></article>
-        <article class="card reveal delay1"><div class="icon">◉</div><h3>AV Integration</h3><p>Projectors, screens, immersive audio, subwoofers, amplifiers and control systems professionally integrated.</p></article>
-        <article class="card reveal delay2"><div class="icon">✦</div><h3>Acoustic Treatment</h3><p>Purpose-designed acoustic solutions to improve clarity, immersion and listening comfort.</p></article>
-        <article class="card reveal"><div class="icon">▣</div><h3>Theatre Interiors</h3><p>Wall treatments, carpets, lighting, platforms and finishing details that give the room a true cinema identity.</p></article>
-        <article class="card reveal delay1"><div class="icon">⌂</div><h3>Custom Manufacturing</h3><p>Built-to-fit theatre elements and furniture designed around your room dimensions and equipment.</p></article>
-        <article class="card reveal delay2"><div class="icon">↗</div><h3>Complete Execution</h3><p>One coordinated solution for design, manufacturing, installation and final commissioning.</p></article>
-      </div>
-    </div>
-  </section>
+    <section id="expertise" class="py-24 bg-dark-800 relative">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 reveal">
+                <h4 class="text-gold-500 tracking-widest uppercase text-sm mb-2 font-semibold">What We Do</h4>
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">OUR EXPERTISE</h2>
+            </div>
 
-  <section class="experience" id="experience">
-    <div class="container">
-      <div class="section-head reveal">
-        <div><div class="kicker">03 / The UMAX Approach</div><h2>Designed to<br>disappear. Built to perform.</h2></div>
-        <p>Technology should be felt, not clutter the room. We focus on clean integration, accurate performance and a premium cinematic atmosphere.</p>
-      </div>
-      <div class="feature-grid">
-        <div class="feature reveal"><span>01</span><h3>Immersive Sound</h3><p>Positioned and calibrated for a powerful, enveloping listening experience.</p></div>
-        <div class="feature reveal delay1"><span>02</span><h3>Perfect Picture</h3><p>Screen and projection design planned for your room, viewing distance and content.</p></div>
-        <div class="feature reveal delay2"><span>03</span><h3>Acoustic Balance</h3><p>Treatment that helps control reflections and delivers cleaner sound.</p></div>
-        <div class="feature reveal delay3"><span>04</span><h3>Premium Atmosphere</h3><p>Lighting, materials and details that transform an ordinary room into a private cinema.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta" id="contact">
-    <div class="container">
-      <div class="cta-box reveal">
-        <div>
-          <div class="kicker">04 / Start Your Theatre</div>
-          <h2>Let's build your<br>private cinema.</h2>
-          <p>Tell us about your room, ideas and budget. We'll help you turn the space into a theatre designed around the way you watch.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-500 group">
+                    <div class="w-14 h-14 bg-dark-900 rounded-full flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-colors duration-300">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3 class="text-xl font-heading text-white mb-3">HOME THEATRE MANUFACTURING</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Custom-built cinema rooms designed completely around the client's space, preferences, and requirements.</p>
+                </div>
+                <div class="glass p-8 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-500 group" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 bg-dark-900 rounded-full flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-colors duration-300">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
+                    <h3 class="text-xl font-heading text-white mb-3">ACOUSTIC TREATMENT</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Professional acoustic engineering and solutions for superior sound clarity and truly immersive cinema performance.</p>
+                </div>
+                <div class="glass p-8 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-500 group" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 bg-dark-900 rounded-full flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-colors duration-300">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <h3 class="text-xl font-heading text-white mb-3">AUDIO & DOLBY ATMOS</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Immersive, multidimensional surround sound systems specifically designed for a true theatrical experience.</p>
+                </div>
+                <div class="glass p-8 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-500 group">
+                    <div class="w-14 h-14 bg-dark-900 rounded-full flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-colors duration-300">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="text-xl font-heading text-white mb-3">4K / 8K PROJECTION</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">High-fidelity projection systems paired with premium cinema screens for breathtaking, stunning picture quality.</p>
+                </div>
+                <div class="glass p-8 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-500 group" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 bg-dark-900 rounded-full flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-colors duration-300">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3 class="text-xl font-heading text-white mb-3">CUSTOM CINEMA INTERIORS</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Premium wall paneling, ceiling design, specialized lighting, luxury carpets, and bespoke interior treatments.</p>
+                </div>
+                <div class="glass p-8 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-500 group" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 bg-dark-900 rounded-full flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-colors duration-300">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-heading text-white mb-3">COMPLETE THEATRE SOLUTIONS</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">An end-to-end service from initial design and manufacturing to professional installation and final calibration.</p>
+                </div>
+            </div>
         </div>
-        <a class="btn btn-primary" href="mailto:umaxmediain@gmail.com">EMAIL UMAX MEDIA</a>
-      </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 reveal">
+                <h4 class="text-gold-500 tracking-widest uppercase text-sm mb-2 font-semibold">Portfolio</h4>
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white">FEATURED PROJECTS</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <div class="group relative rounded-2xl overflow-hidden reveal img-hover-zoom cursor-pointer aspect-video md:aspect-[4/3]">
+                    <img src="Eyvox_HT_LH (4).jpeg" alt="Featured Project 1" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <h3 class="text-2xl font-heading text-white mb-2">Modern Minimalist</h3>
+                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Clean aesthetics with premium acoustic integration.</p>
+                    </div>
+                </div>
+                
+                <div class="group relative rounded-2xl overflow-hidden reveal img-hover-zoom cursor-pointer aspect-video md:aspect-[4/3]" style="transition-delay: 150ms;">
+                    <img src="Eyvox_HT_LH (5).jpeg" alt="Featured Project 2" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <h3 class="text-2xl font-heading text-white mb-2">Executive Suite</h3>
+                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Deep aesthetic tones paired with premium tiered seating.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 bg-dark-800 relative">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 reveal">
+                <h4 class="text-gold-500 tracking-widest uppercase text-sm mb-2 font-semibold">Inspiration</h4>
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">CINEMA GALLERY</h2>
+            </div>
+
+            <!-- Masonry-style Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[200px] md:auto-rows-[250px]">
+                
+                <!-- Item 1 (Wide) -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer reveal group col-span-2" data-src="Eyvox_HT_LH (1).png">
+                    <img src="Eyvox_HT_LH (1).png" alt="Gallery Image 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer reveal group" data-src="Eyvox_HT_LH (2).jpg">
+                    <img src="Eyvox_HT_LH (2).jpg" alt="Gallery Image 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer reveal group" data-src="Eyvox_HT_LH (4).jpeg">
+                    <img src="Eyvox_HT_LH (4).jpeg" alt="Gallery Image 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <!-- Item 4 (Tall) -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer reveal group row-span-2" data-src="Eyvox_HT_PH (1).png">
+                    <img src="Eyvox_HT_PH (1).png" alt="Gallery Image 4" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer reveal group" data-src="Eyvox_HT_LH (5).jpeg">
+                    <img src="Eyvox_HT_LH (5).jpeg" alt="Gallery Image 5" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer reveal group" data-src="Eyvox_HT_PH (1).jpg">
+                    <img src="Eyvox_HT_PH (1).jpg" alt="Gallery Image 6" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer reveal group" data-src="Eyvox_HT_PH (2).jpeg">
+                    <img src="Eyvox_HT_PH (2).jpeg" alt="Gallery Image 7" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer reveal group" data-src="Eyvox_HT_PH (3).jpeg">
+                    <img src="Eyvox_HT_PH (3).jpeg" alt="Gallery Image 8" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer reveal group" data-src="Eyvox_HT_PH (4).jpeg">
+                    <img src="Eyvox_HT_PH (4).jpeg" alt="Gallery Image 9" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="lightbox" class="hidden items-center justify-center">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-gold-500 text-4xl focus:outline-none transition-colors"><i class="fas fa-times"></i></button>
+        <button id="lightbox-prev" class="absolute left-6 top-1/2 transform -translate-y-1/2 text-white hover:text-gold-500 text-4xl focus:outline-none transition-colors"><i class="fas fa-chevron-left"></i></button>
+        <img id="lightbox-img" src="" alt="Full Screen Gallery" class="max-w-[90%] max-h-[90vh] object-contain rounded-lg shadow-2xl">
+        <button id="lightbox-next" class="absolute right-6 top-1/2 transform -translate-y-1/2 text-white hover:text-gold-500 text-4xl focus:outline-none transition-colors"><i class="fas fa-chevron-right"></i></button>
     </div>
-  </section>
-</main>
 
-<footer>
-  <div class="container footer-inner">
-    <div class="footer-brand">UMAX MEDIA · HOME THEATRE</div>
-    <div class="contactline">
-      <a href="tel:+9188855199">+91 8885 5199</a>
-      <a href="mailto:umaxmediain@gmail.com">umaxmediain@gmail.com</a>
-      <span>Calicut, Kerala</span>
-    </div>
-  </div>
-</footer>
+    <section class="py-24 bg-dark-900 relative">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            
+            <div class="reveal-left">
+                <h4 class="text-gold-500 tracking-widest uppercase text-sm mb-2 font-semibold">The Advantage</h4>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-10">WHY UMAX MEDIA</h2>
+                
+                <div class="space-y-8">
+                    <div class="flex items-start">
+                        <div class="text-gold-500 mt-1 mr-6 text-xl"><i class="fas fa-drafting-compass"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-1">CUSTOM BUILT</h3>
+                            <p class="text-gray-400 text-sm">Every theatre is meticulously designed according to the client's unique space and requirements.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-gold-500 mt-1 mr-6 text-xl"><i class="fas fa-gem"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-1">PREMIUM MATERIALS</h3>
+                            <p class="text-gray-400 text-sm">Carefully selected, high-grade materials ensuring long-lasting performance and aesthetic brilliance.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-gold-500 mt-1 mr-6 text-xl"><i class="fas fa-film"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-1">CINEMATIC EXPERIENCE</h3>
+                            <p class="text-gray-400 text-sm">Engineered to deliver a flawlessly immersive, commercial-grade movie experience at home.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-gold-500 mt-1 mr-6 text-xl"><i class="fas fa-hard-hat"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-1">PROFESSIONAL INSTALLATION</h3>
+                            <p class="text-gray-400 text-sm">Comprehensive execution from technical integration to precise finishing by experts.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-gold-500 mt-1 mr-6 text-xl"><i class="fas fa-search"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-1">ATTENTION TO DETAIL</h3>
+                            <p class="text-gray-400 text-sm">Every single element is planned for acoustic performance, comfort, and striking visual appeal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<script>
-  const header = document.getElementById('header');
-  const menu = document.getElementById('menu');
-  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 25));
-  menu.addEventListener('click', () => header.classList.toggle('open'));
-  document.querySelectorAll('.navlinks a').forEach(a => a.addEventListener('click', () => header.classList.remove('open')));
+            <div class="reveal glass p-8 md:p-12 rounded-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 text-9xl text-white/5 opacity-20 pointer-events-none font-heading font-bold">PROCESS</div>
+                <h4 class="text-gold-500 tracking-widest uppercase text-sm mb-2 font-semibold">How We Work</h4>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-10">OUR PROCESS</h2>
+                
+                <div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-gold-500 before:to-dark-800">
+                    
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-dark-900 border-2 border-gold-500 text-gold-500 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors duration-300 group-hover:bg-gold-500 group-hover:text-black">01</div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm"><h3 class="font-bold text-white text-sm tracking-wide">CONSULTATION</h3></div>
+                    </div>
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-dark-900 border-2 border-gold-500 text-gold-500 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors duration-300 group-hover:bg-gold-500 group-hover:text-black">02</div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm"><h3 class="font-bold text-white text-sm tracking-wide">DESIGN</h3></div>
+                    </div>
+
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-dark-900 border-2 border-gold-500 text-gold-500 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors duration-300 group-hover:bg-gold-500 group-hover:text-black">03</div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm"><h3 class="font-bold text-white text-sm tracking-wide">MANUFACTURING</h3></div>
+                    </div>
+
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-dark-900 border-2 border-gold-500 text-gold-500 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors duration-300 group-hover:bg-gold-500 group-hover:text-black">04</div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm"><h3 class="font-bold text-white text-sm tracking-wide">INSTALLATION</h3></div>
+                    </div>
+
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-dark-900 border-2 border-gold-500 text-gold-500 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors duration-300 group-hover:bg-gold-500 group-hover:text-black">05</div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm"><h3 class="font-bold text-white text-sm tracking-wide">FINAL CALIBRATION</h3></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 relative flex items-center justify-center text-center cta-bg">
+        <div class="absolute inset-0 bg-black/80"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-6 reveal">
+            <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-6">BUILD YOUR PRIVATE CINEMA</h2>
+            <p class="text-xl text-gray-300 font-light mb-10 max-w-2xl mx-auto">
+                "Let's create a home theatre designed around your space, your style and your entertainment experience."
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                <a href="tel:+91888551999" class="px-8 py-4 bg-gold-500 text-black hover:bg-gold-400 transition-colors duration-300 rounded-full font-bold tracking-wide flex items-center justify-center gap-2">
+                    <i class="fas fa-phone-alt"></i> CALL NOW
+                </a>
+                <a href="https://wa.me/91888551999" target="_blank" class="px-8 py-4 bg-[#25D366] text-white hover:bg-[#1ebd5a] transition-colors duration-300 rounded-full font-bold tracking-wide flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp text-lg"></i> WHATSAPP US
+                </a>
+                <a href="mailto:umaxmediain@gmail.com" class="px-8 py-4 border border-white text-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full font-bold tracking-wide flex items-center justify-center gap-2">
+                    <i class="fas fa-envelope"></i> EMAIL US
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-dark-950 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center reveal">
+            <div>
+                <h4 class="text-gold-500 tracking-widest uppercase text-sm mb-2 font-semibold">Get In Touch</h4>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">LET'S CREATE YOUR CINEMA</h2>
+                <div class="mt-8 space-y-4">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-dark-900 border border-white/10 flex items-center justify-center text-gold-500 mr-4">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-bold">UMAX MEDIA</h5>
+                            <p class="text-gray-400 text-sm">Home Theatre Manufacturing<br>Calicut, Kerala, India</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-dark-900 border border-white/10 flex items-center justify-center text-gold-500 mr-4">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-bold">Phone</h5>
+                            <a href="tel:+91888551999" class="text-gray-400 text-sm hover:text-gold-500 transition-colors">+91 88855 1999</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-dark-900 border border-white/10 flex items-center justify-center text-gold-500 mr-4">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-bold">Email</h5>
+                            <a href="mailto:umaxmediain@gmail.com" class="text-gray-400 text-sm hover:text-gold-500 transition-colors">umaxmediain@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass p-8 md:p-10 rounded-2xl flex flex-col space-y-4">
+                <a href="tel:+91888551999" class="w-full px-6 py-4 bg-dark-900 border border-white/10 text-white hover:border-gold-500 transition-colors duration-300 rounded-xl font-medium tracking-wide flex items-center justify-between group">
+                    <span class="flex items-center gap-3"><i class="fas fa-phone-alt text-gold-500 group-hover:scale-110 transition-transform"></i> CALL NOW</span>
+                    <i class="fas fa-arrow-right text-gray-600 group-hover:text-gold-500 transition-colors"></i>
+                </a>
+                <a href="https://wa.me/91888551999" target="_blank" class="w-full px-6 py-4 bg-dark-900 border border-white/10 text-white hover:border-[#25D366] transition-colors duration-300 rounded-xl font-medium tracking-wide flex items-center justify-between group">
+                    <span class="flex items-center gap-3"><i class="fab fa-whatsapp text-[#25D366] text-xl group-hover:scale-110 transition-transform"></i> WHATSAPP</span>
+                    <i class="fas fa-arrow-right text-gray-600 group-hover:text-[#25D366] transition-colors"></i>
+                </a>
+                <a href="mailto:umaxmediain@gmail.com" class="w-full px-6 py-4 bg-dark-900 border border-white/10 text-white hover:border-blue-400 transition-colors duration-300 rounded-xl font-medium tracking-wide flex items-center justify-between group">
+                    <span class="flex items-center gap-3"><i class="fas fa-envelope text-blue-400 group-hover:scale-110 transition-transform"></i> EMAIL</span>
+                    <i class="fas fa-arrow-right text-gray-600 group-hover:text-blue-400 transition-colors"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <img src="Logo.png" alt="UMAX MEDIA" class="h-8 mx-auto mb-4 opacity-70 transition-all duration-300">
+            <p class="text-gray-500 text-sm mb-2">Home Theatre Manufacturing | Calicut, Kerala, India</p>
+            <p class="text-gray-600 text-xs tracking-wider uppercase mt-4">&copy; 2026 UMAX MEDIA. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 800);
+            }, 1000);
+
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-dark-950/90', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-white/5');
+                    navbar.classList.remove('py-6');
+                    navbar.classList.add('py-4');
+                } else {
+                    navbar.classList.remove('bg-dark-950/90', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-white/5');
+                    navbar.classList.add('py-6');
+                    navbar.classList.remove('py-4');
+                }
+            });
+
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                if(isMenuOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    setTimeout(() => {
+                        mobileMenu.classList.remove('opacity-0');
+                        mobileMenu.classList.add('flex', 'opacity-100');
+                    }, 10);
+                    mobileBtn.innerHTML = '<i class="fas fa-times text-2xl text-white"></i>';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.remove('opacity-100');
+                    mobileMenu.classList.add('opacity-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex');
+                    }, 300);
+                    mobileBtn.innerHTML = '<i class="fas fa-bars text-2xl"></i>';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+
+            mobileBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left');
+            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => revealOnScroll.observe(el));
+
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeBtn = document.getElementById('lightbox-close');
+            const prevBtn = document.getElementById('lightbox-prev');
+            const nextBtn = document.getElementById('lightbox-next');
+            
+            let currentImageIndex = 0;
+            const images = Array.from(galleryItems).map(item => item.getAttribute('data-src'));
+
+            function openLightbox(index) {
+                currentImageIndex = index;
+                lightboxImg.src = images[currentImageIndex];
+                lightbox.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+
+            function showNext() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                lightboxImg.src = images[currentImageIndex];
+            }
+
+            function showPrev() {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                lightboxImg.src = images[currentImageIndex];
+            }
+
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox(index));
+            });
+
+            closeBtn.addEventListener('click', closeLightbox);
+            nextBtn.addEventListener('click', showNext);
+            prevBtn.addEventListener('click', showPrev);
+
+            lightbox.addEventListener('click', (e) => {
+                if(e.target === lightbox) closeLightbox();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if(!lightbox.classList.contains('show')) return;
+                if(e.key === 'Escape') closeLightbox();
+                if(e.key === 'ArrowRight') showNext();
+                if(e.key === 'ArrowLeft') showPrev();
+            });
+        });
+    </script>
 </body>
 </html>
